@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Поля зрения — журнал о восприятии мира</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;color:#29251f;background:#f1eadf;font-family:Georgia,"Times New Roman",serif;line-height:1.75}
+.layout{display:grid;grid-template-columns:38% 62%;align-items:start;min-height:100vh}
+.left-column{position:sticky;top:0;height:100vh;overflow:hidden;margin:0;background:#ded2c2}
+.left-column img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.right-column{min-width:0;min-height:100vh;padding:clamp(24px,5vw,72px);background:#f1eadf}
+.site-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;padding-bottom:22px;margin-bottom:64px;border-bottom:1px solid #cfc4b6}
+.label,.eyebrow{margin:0;color:#a05e70;font-family:Arial,Helvetica,sans-serif;font-size:10px;letter-spacing:2px;line-height:1.6;text-transform:uppercase}
+.site-header nav{display:flex;flex-wrap:wrap;gap:20px}
+a{color:#a05e70;text-underline-offset:4px}
+.site-header a{font-family:Arial,Helvetica,sans-serif;font-size:12px;text-decoration:none}
+.article-body{max-width:760px;margin:0 auto}
+.article-title{margin:16px 0 22px;font-size:clamp(38px,5vw,66px);font-weight:normal;letter-spacing:-1.8px;line-height:1.05}
+.dek{margin-bottom:54px;color:#6f675c;font-size:19px}
+.article-body section{margin:0 0 64px;scroll-margin-top:24px}
+.article-body h2{margin:36px 0 20px;font-size:clamp(28px,3vw,42px);font-weight:normal;letter-spacing:-.8px;line-height:1.15}
+.article-body p{margin:0 0 24px;font-size:17px;line-height:1.85}
+.article-body .eyebrow{margin-bottom:14px}
+.pullquote{margin:42px 0;padding:10px 0 10px 24px;border-left:2px solid #c58b9c;color:#a05e70;font-size:clamp(23px,2.4vw,30px);font-style:italic;line-height:1.5}
+hr{margin:42px 0;border:0;border-top:1px solid #cfc4b6}
+.placeholder{padding:22px;px;border:1px dashed #c58b9c;color:#6f675c;font-size:15px!important}
+footer{padding-top:22px;border-top:1px solid #cfc4b6;color:#82796d;font-family:Arial,Helvetica,sans-serif;font-size:10px;letter-spacing:1.2px;text-transform:uppercase}
+@media(max-width:760px){.layout{grid-template-columns:1fr}.left-column{position:relative;height:42vh}.left-column img{object-position:center 35%}.right-column{padding:28px 22px}.site-header{margin-bottom:42px}.article-body p{font-size:16px}.article-title{letter-spacing:-1px}}
+
+.article-toc {
+  margin: -30px 0 48px;
+  padding: 20px 0;
+  border-top: 1px solid #cfc4b6;
+  border-bottom: 1px solid #cfc4b6;
+}
+
+.article-toc .eyebrow {
+  margin-bottom: 12px;
+}
+
+.article-toc a {
+  display: block;
+  width: fit-content;
+  margin: 8px 0;
+  color: #6f675c;
+  font-size: 14px;
+  text-decoration: none;
+  transition: color .2s;
+}
+
+.article-toc a:hover {
+  color: #a05e70;
+}
+
+@media (max-width: 760px) {
+  .article-toc {
+    margin-top: -15px;
+  }
+}
+
+.left-column {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.left-column > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.left-overlay {
+  position: relative;
+  z-index: 1;
+  min-height: 100%;
+  height: 100%;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: rgba(35, 32, 28, 0.48);
+  color: #f1eadf;
+}
+
+.left-brand {
+  font-size: 12px;
+  letter-spacing: 3px;
+}
+
+
+.left-overlay .article-toc {
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto;
+  padding: 24px 0;
+  border-top: 1px solid rgba(241, 234, 223, .5);
+  border-bottom: 1px solid rgba(241, 234, 223, .5);
+}
+
+.left-overlay .article-toc .eyebrow {
+  margin-bottom: 20px;
+  color: #e2b5c1;
+  text-align: center;
+}
+
+.left-overlay .article-toc a {
+  display: block;
+  margin: 14px 0;
+  color: #f1eadf;
+  font-size: 14px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.left-overlay .article-toc a:hover {
+  color: #e2b5c1;
+}
+
+.article-image {
+  margin: 40px 0;
+}
+
+.article-image img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 1;
+  height: 300px;
+  object-fit: cover;
+}
+.blue-photo {
+  margin: 50px 0;
+}
+
+.blue-photo img {
+  display: block;
+  width: 100%;
+  height: 270px;
+  object-fit: cover;
+  object-position: center;
+}
+.red-blue-photo {
+  margin: 50px 0;
+}
+
+.red-blue-photo img {
+  display: block;
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  object-position: center;
+}
+.flowers-photo {
+  margin: 50px 0;
+}
+
+.flowers-photo img {
+  display: block;
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  object-position: center;
+}
+.flowers-photo figcaption {
+  margin-top: 10px;
+  font-size: 12px;
+  opacity: 0.7;
+  letter-spacing: 0.04em;
+}
+.green-photo {
+  margin: 50px 0;
+}
+
+.green-photo img {
+ display: block;
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  object-position: center;
+}
+.grey-photo {
+  margin: 50px 0;
+}
+
+.grey-photo img {
+ display: block;
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  object-position: center;
+}
+.mama-photo {
+  margin: 50px 0;
+}
+.grafiki-photo {
+  width: 100%;
+  margin: 55px 0;
+}
+
+.grafiki-photo img {
+  display: block;
+  width: 100%;
+  height: 350;
+  object-fit: contain;
+}
+
+.grafiki-photo figcaption {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid #a9a09255;
+  color: #a9a092;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.grafiki-photo figcaption a {
+  color: #d5a7b3;
+  text-decoration: none;
+}
+
+.grafiki-photo figcaption a:hover {
+  text-decoration: underline;
+}
+
+.mama-photo img {
+  display: block;
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  object-position: center;
+}
+.left-caption {
+  margin: 0;
+  font: 9px Arial, sans-serif;
+  letter-spacing: 1.5px;
+  line-height: 1.8;
+}
+.kvadrat-photo {
+  margin: 70px 0;
+}
+.zet-photo {
+  margin: 40px 0;
+  width: 100%;
+}
+
+.zet-photo img {
+  display: block;
+  width: 100%;
+  height: 300px;
+  object-fit: contain;
+}
+
+.kvadrat-photo webp {
+  display: block;
+  width: 150%;
+  height: 370px;
+  object-fit: cover;
+  object-position: center;
+}
+@media (max-width: 760px) {
+  .left-overlay {
+    min-height: 420px;
+    padding: 24px;
+  }
+}
+.top-banner {
+  grid-column: 1 / -1;
+  display: block;
+  width: 100%;
+  height: 150px;
+  aspect-ratio: 3 / 1;
+  object-fit: cover;
+  object-position: center;
+  
+.topbar {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 18px 24px;
+  padding: 5px 5vw 22px;
+  border-bottom: 1px solid var(--line);
+  font: 11px var(--site-font-heading);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+
+<aside class="left-column">
+  <img src="images/background.jpg" alt="Коллаж журнала «Поля зрения»">
+
+  <div class="left-overlay">
+    <p class="left-brand">ПОЛЯ ЗРЕНИЯ</p>
+
+    <nav class="article-toc">
+      <p class="eyebrow">В ЭТОМ МАТЕРИАЛЕ</p>
+      <a href="#about">01 — Цвет и восприятие</a>
+      <a href="#time">02 — Цвет и время</a>
+      <a href="#long">03 — Цвет и наше поведение</a>
+      <a href="#pushka">04 — Язык и зрение</a>
+      <a href="#fish">05 — Границы цвета</a>
+      <a href="#conclusion">06 — Итоги</a>
+      <a href="#sources">07 — Дополнительные материалы</a>
+    </nav>
+
+    <p class="left-caption">ЖУРНАЛ О ВОСПРИЯТИИ МИРА · № 001</p>
+  </div>
+</aside>
+
+<main class="right-column">
+    <img class="top-banner" src="images/uzor.jpg" alt="">
+<nav class="article-toc">
+</nav>
+<p class="label">ПОЛЯ ЗРЕНИЯ · № 001</p>
+</header>
+<article id="article" class="article-body">
+<p class="eyebrow">Главный материал</p>
+<h1 class="article-title">Способен ли язык определить,<br>как мозг анализирует мир?</h1>
+<p class="dek">Журнал о восприятии мира</p>
+<hr>
+<section id="about">
+<p class="eyebrow">01 / Цвет и восприятие</p>
+<p>Цвет — это неотъемлемая часть наша жизни. Он влияет на все, что мы делаем. Вот мы видим желтые листья на деревьях осенью, голубое небо, но правда ли они такие? На самом деле, цвет иллюзия, которая помогает нам видеть мир в удобных оттенках.</p>
+<blockquote class="pullquote">Как мы различаем цвета и видим ли мы их одинаково?</blockquote>
+<h2>Красный цвет и <em>спорт</em></h2>
+<p>Что если я вам скажу, что спортсмены в красной форме помогают помогать в поединках и соревнованиях? Почему так происходит?</p>
+<figure class="article-image reveal">
+  <img src="images/red-athletes.jpg" alt="Спортсмены в красной и синей форме">
+</figure>
+<p>В футболе есть поверье что красный цвет приводит к победе.</p>
+<p>И был проведен эксперимент, в ходе которого собрали команду футболистов, они не знали суть эксперимента и самостоятельно разделились на команды синей и красной формы. Главная задача ученых была выяснить делает ли красная форма сильнее самого человека или пугает его соперника? Они взяли у футболистов два гормона, тестостерон и кортизол.</p>
+<p>У красной команды уровень кортизола был меньше, чем у синей. Красный цвет, скорее всего, помогает футбольным клубам благодаря психологическому эффекту, который он оказывает на них и их соперников. Антропологи указывают на эксперименты психологов, которые доказали, что у человека при взгляде на красное снижается способность к проявлению лучших качеств.</p>
+<figure class="article-image blue-photo">
+  <img src="images/atletiki.jpg" alt="Спортсмены">
+</figure>
+</section>
+<section id="time">
+<p class="eyebrow">02 / Цвет и время</p>
+<h2>Могут ли цвета изменить <em>чувство времени?</em></h2>
+<p>Эксперимент с кабинами</p>
+<p>Иногда более возбуждающие или эмоционально значимые цвета воспринимаются как длящиеся дольше. Бывает же такое когда кажется что день длится просто бесконечно. Так же и с цветами.</p>
+<p>Людей поместили в кабинки с цветами где преобладает красный и синий, и нужно было понять, сколько по их мнению длится минута и подать знак, когда минута закончится.</p>
+<p>И оказалось, что в синей кабинке минута длится на 11 секунд меньше, чем в красной.</p>
+<figure class="article-image reveal red-blue-photo">
+  <img src="images/cabinki.jpg" alt="Люди во времени">
+</figure>
+<p>Дело в том, что красный вызывает состояние возбуждения, мы больше сосредоточены на деталях, а синий ускоряет восприятие времени. Синий как цвет отражает физиологическую и психическую потребность, а именно покой.</p>
+<p>Если продолжать говорить про синий и красный, то согласно закону Йеркса Додсона, при выполнении простых задач высокий уровень возбуждения (связанный с красным цветом) более эффективен, чем низкий (связанный с синим цветом). Напротив, при выполнении сложных задач низкий уровень возбуждения (связанный с синим цветом) более эффективен, чем высокий (связанный с красным цветом). И получается, что тип и сложность задач влияют на цветовой эффект через мотивацию и возбуждение соответственно.</p>
+<p>Было проведено два эксперимента:</p>
+<p>1. В первом изучали внимание к деталям: красный фон оказался связан с более высокой точностью в простых заданиях, а синий — в сложных.</p>
+<p>2. Во втором изучали творческое мышление: участники на синем фоне в среднем показали более высокую точность, чем участники на красном и сером. При этом взаимодействие цвета со сложностью задания статистически значимым не было.</p>
+<p>Исследование действительно обнаружило различия в точности выполнения конкретного задания. Но из этого не следует, что красный всегда улучшает концентрацию, а синий делает человека умнее или лучше решает любые сложные задачи.</p>
+<p>Причины такого эффекта могут быть разными: психологические ассоциации с цветом, уровень возбуждения, особенности восприятия или другие факторы. Чтобы уверенно установить механизм, потребуются дополнительные исследования.</p></section>
+
+<section class="article" id="article">
+  <article class="article-body"></article>
+  <section id="long">
+<p class="eyebrow">03 / Цвет и наше поведение</p>
+  <h2 class="reveal">Влияние цвета на наше поведение</h2>
+   <p class="reveal">Думаю, многие знают, что цвета красный и коричневый вызывают чувство голода, поэтому чаще всего в ресторанах кафе, преобладает красный цвет. Но один дизайнер решил изменить такую концепцию и вместо красного он выбрал синий. Мы помним, что синий цвет вызывает покой, но каждый вечер около 10 часов поведение посетителей менялось. По сути они должны быть более расслабленными, но в итоге они были более возбуждены и энергичны.</p>
+
+    <h2 class="reveal">Как свет попадающий в глаз регулирует время?</h2>
+
+    <p class="reveal">Помимо колбочек и палочек, есть еще один класс:</p>
+
+    <p class="reveal">Это фоточувствительный ганглий.</p>
+
+    <p class="reveal">Эти клетки регулируют биологические часы, уровень возбуждения, бдительности и помогают синхронизировать циклы сна и активности с окружающим освещением. И самое интересное эта клетка, которая посылает сигнал в мозг чтобы вы проснулись чувствительна только к одному цвету синему, поэтому посетители этого заведения оживлялись в 10 вечера.</p>
+<figure class="article-image flowers-photo">
+  <img src="images/flowers.jpg" alt="Кадр с цветами из фильма">
+  <figcaption>Кадр из фильма Дэвида Линча "Синий бархат"</figcaption>
+</figure>
+    <section id="pushka">
+<p class="eyebrow">04 / Язык и зрение</p>
+    <h2 class="reveal">Влияние языка на восприятие цветов</h2>
+
+    <p class="reveal">Сейчас я расскажу свой любимый эксперимент, который мне так запомнился.</p>
+<figure class="article-image reveal mama-photo">
+  <img src="images/naba.jpg" alt="Северная Намибия">
+  </figure>
+    <p class="reveal">Северная Намибия. Народ Химба очень необычно различают цвета. И учёный Джулии Давидофф провел исследование. Эксперимент проводился в местном племени, которое говорит на языке, где нет определения синему цвету и отсутствуют различия между голубым и зелёным. Местным жителям был показан круг с 11 зелёными квадратами и одним голубым, и в итоге члены племени лишь с трудом смогли найти различия.</p>
+<figure class="article-image reveal kvadrat-photo">
+  <img src="images/kvadrat.webp" alt="Цветовое восприятие">
+</figure>
+    <p class="reveal"> У народа Химба имеется больше слов для обозначения зеленого цвета, чем у нас. В схожем эксперименте Дафидофф совместно с коллегами демонстрировал круг из 12 квадратов англоговорящим людям: 11 квадратов были зеленого цвета одного оттенка, а один – зеленого цвета отличного оттенка. И если у народу Химба потребовалось пару секунд, чтобы обнаружить квадрат другого оттенка, то англоговорящим участникам потребовалось куда больше времени.</p>
+    <figure class="article-image reveal green-photo">
+  <img src="images/green.jpg" alt="Зелёный цвет">
+</figure>
+    <p class="reveal">Джули Давидофф сделал вывод, что без слова, определяющего цвет, без способа его идентификации, нам очень сложно заметить какое-то различие, хотя наши глаза физически их воспринимают.</p>
+<figure class="article-image reveal green-photo">
+  <img src="images/grey.jpg" alt="Зелёный цвет">
+
+    
+    <p class="reveal">Еще для примера, носители английского языка считают цвета, которые пересекают границу английской категории между зеленым и синим, менее похожи, чем носители Тарахумара, уто-ацтекского языка Мексики, который использует одно слово для этих цветов.</p>
+
+    <p class="reveal">В отличие от английского, русский язык проводит различие между более светлым синим (<em>goluboy</em>) и более темным синим (<em>siniy</em>), и русскоговорящие быстрее, по сравнению с англоговорящими, в различении двух цветов, когда они попадают в разные категории, один <em>голубой</em>, а другой <em>синий</em>, чем, когда они принадлежат к одной категории.</p>
+
+    <p class="reveal">Также в 2007 был проведён эксперимент между русскоговорящими и англоговорящим. Им нужно было выполнять задачи на границе категорий «голубой/синий». Испытуемым показывали 20 стимулов (по два раза) в случайном порядке и просили классифицировать каждый цвет нажатием клавиши: синий или голубой (для русскоговорящих) или темно-синий или светло-синий (для англоговорящих). И обнаружили, что русские якобы быстрее различают синий и голубой именно потому, что в русском это две разные категории.</p>
+
+    <p class="reveal">Эти результаты также показывают, что языковые категории влияют на выполнение простых задач на восприятие цвета.</p>
+    <section id="fish">
+      <p class="eyebrow">05 / Границы цвета</p>
+
+      <h2 class="reveal"> Можно ли придумать<br><em>новый цвет?</em></h2>
+
+<p class="reveal">Я думаю, каждый когда-нибудь задумывался о том, можно придумать новый цвет и усердно пытался представить его у себя в голове. Был эксперимент в котором приняли участие тридцать один взрослый студент Пекинского колледжа. Ни у кого не было неврологических или психиатрических заболеваний, не было дальтонизма. Все испытуемые были правшами. Почему это важно? У большинства людей левое полушарие сильнее участвует в обработке языка.</p>
+
+<p class="reveal">Участники были разделены на две группы: экспериментальная группа (n = 18), члены которой прошли интенсивную подготовку для получения новых названий цветов (рис. 1 A и B) и контрольная группа (n = 13), члены которой выполняли те же задачи, что и в экспериментальной группе, но связывали цвета с ужа существующими, стандартными названиями, а не вводили новые лексические категории.</p>
+
+<p class="reveal">Перед экспериментом всем испытуемым был проведен сине-зеленый лексический тест. В каждом испытании квадратный стимул (один из четырех цветов, G1, G2, B1 и B2) был представлен в центре на сером фоне в течение 200 мс, за которым следовал интервал в 1000 мс. Участники указывали, был ли цвет зеленым или синим, нажав одну из двух клавиш.</p>
+
+<p class="reveal">Исследователи обнаружили, что после обучения новые категории цветов влияли на восприятие по-разному в зависимости от того, в каком зрительном поле появлялся цвет. Это согласуется с тем, что язык может влиять на то, как мозг группирует и различает оттенки.</p>
+
+<h2 class="reveal">Значит ли это, что люди научились видеть новый цвет?</h2>
+
+<p class="reveal">Не совсем. В эксперименте не создали новый цвет в физическом смысле и не доказали, что участники начали испытывать совершенно новое зрительное ощущение. Участники научились по-новому классифицировать уже доступные зрению оттенки, и это отразилось на выполнении зрительных задач.</p>
+
+<p class="reveal">Здесь два треугольных графика. Я простыми словами постараюсь донести как это всё работает.</p>
+<figure class="article-image reveal grafiki-photo">
+  <img src="images/grafiki.jpg" alt="Цветовой диапазон Oz и результаты моделирования">
+  <figcaption>
+    Цветовой диапазон Oz: зависимость от длины волны и утечки света.
+    Источник: Fong et al., Science Advances (2025), Fig. 2.
+    <a href="https://doi.org/10.1126/sciadv.adu1052" target="_blank" rel="noopener noreferrer">
+      Оригинальная статья ↗
+    </a>
+  </figcaption>
+</figure>
+<p class="reveal">Эти треугольники показывают насколько точно система может создавать разные цвета и что мешает ей это делать.</p>
+
+<p class="reveal">Вершины треугольника обозначены буквами:</p>
+
+<p class="reveal">L длинноволновые колбочки, которые наиболее чувствительные к длинным волнам света.</p>
+
+<p class="reveal">M средневолновые колбочки.</p>
+
+<p class="reveal">S коротковолновые колбочки.</p>
+
+<p class="reveal">Каждая вершина соответствует максимально выраженному сигналу одного типа колбочек, а точки внутри треугольника различным сочетаниям сигналов.</p>
+
+<p class="reveal">По вертикальной шкале слева указана доля света, попадающего в соседние участки сетчатки, в процентах и чем сильнее свет распространяется на соседние колбочки, тем труднее активировать только нужные рецепторы. Поэтому доступный цветовой диапазон уменьшается.</p>
+
+<p class="reveal">Здесь исследуется, как меняется цветовой диапазон при использовании света с разной длиной волны.</p>
+
+<p class="reveal">На рисунке указаны значения от 400 до 700 нм, включая 488, 508, 519 и 543 нм.</p>
+
+<p class="reveal">Колбочки имеют перекрывающиеся спектры чувствительности. Один и тот же лазер может активировать несколько типов колбочек, но в разных пропорциях.</p>
+
+<p class="reveal">Меняя длину волны, можно изменить соотношение этих сигналов. Поэтому меняется и набор цветов, который система потенциально способна воспроизвести. Так и получается, что невозможно идеально направить свет на одну колбочку, не затронув соседние, и независимо управлять всеми тремя типами колбочек.</p>
+  </article>
+  <aside class="right-note">Поля зрения · Независимый журнал</aside>
+</section>
+
+<section id="conclusion">
+  <p class="eyebrow">06 / Итоги</p>
+  <h2>Что можно заключить?</h2>
+  <p>Всеми этими экспериментами я хотела показать, что наше восприятие мира не менее важно, чем сам мир. Мы можем видеть одинаковые цвета, но, когда речь пойдет о том, какого цвета понедельник, какого оттенка глаза любимого человека или какой цвет мы выбираем, когда нам грустно, наши ответы будут различаться..</p>
+<figure class="article-image reveal zet-photo">
+  <img src="images/zet.jpg" alt="Цветовое восприятие">
+</figure>
+</section>
+<section id="sources">
+  
+  <div class="eyebrow">Для внимательного чтения</div>
+  <h2>Источники <em>литературы</em></h2>
+  <p>Научные публикации и видеоматериалы, использованные при подготовке статьи.</p>
+
+  <h3>Научные публикации</h3>
+  <ol>
+    <li>
+      Xia, T., Song, L., Wang, T. T., Tan, L., Mo, L.
+      <a href="https://doi.org/10.3389/fpsyg.2016.00784" target="_blank" rel="noopener noreferrer">
+        Exploring the Effect of Red and Blue on Cognitive Task Performances.
+      </a>
+      <em>Frontiers in Psychology</em>. 2016;7:784.
+    </li>
+    <li>
+      Mehta, R., Zhu, R. J.
+      <a href="https://doi.org/10.1126/science.1169144" target="_blank" rel="noopener noreferrer">
+        Blue or red? Exploring the effect of color on cognitive task performances.
+      </a>
+      <em>Science</em>. 2009;323(5918):1226–1229.
+    </li>
+    <li>
+      Hill, R. A., Barton, R. A.
+      <a href="https://doi.org/10.1038/435293a" target="_blank" rel="noopener noreferrer">
+        Red enhances human performance in contests.
+      </a>
+      <em>Nature</em>. 2005;435:293.
+    </li>
+    <li>
+      Winawer, J. et al.
+      <a href="https://doi.org/10.1073/pnas.0701644104" target="_blank" rel="noopener noreferrer">
+        Russian blues reveal effects of language on color discrimination.
+      </a>
+      <em>PNAS</em>. 2007;104(19):7780–7785.
+    </li>
+    <li>
+      Martinovic, J., Paramei, G. V., MacInnes, W. J.
+      <a href="https://scholar.google.com/scholar?q=Martinovic+Paramei+MacInnes+Russian+blues+reveal+the+limits+of+language+influencing+colour+discrimination" target="_blank" rel="noopener noreferrer">
+        Russian blues reveal the limits of language influencing colour discrimination.
+      </a>
+      <em>Cognition</em>. 2020.
+    </li>
+    <li>
+      Zhou, K. et al.
+      <a href="https://scholar.google.com/scholar?q=Zhou+2010+Newly+trained+lexical+categories+produce+lateralized+categorical+perception+of+color" target="_blank" rel="noopener noreferrer">
+        Newly trained lexical categories produce lateralized categorical perception of color.
+      </a>
+      <em>PNAS</em>. 2010.
+    </li>
+    <li>
+      Roberson, D., Davidoff, J., Davies, I. R. L., Shapiro, L. R.
+      <a href="https://doi.org/10.1016/j.cogpsych.2004.10.001" target="_blank" rel="noopener noreferrer">
+        Color categories: Evidence for the cultural relativity hypothesis.
+      </a>
+      <em>Cognitive Psychology</em>. 2005;50(4):378–411.
+    </li>
+    <li>
+      <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5786107/" target="_blank" rel="noopener noreferrer">
+        Color and time perception: Evidence for temporal overestimation of blue stimuli.
+      </a>
+      Научная статья, доступная в PubMed Central.
+    </li>
+    <li>
+      Fong, J. et al.
+      <a href="https://doi.org/10.1126/sciadv.adu1052" target="_blank" rel="noopener noreferrer">
+        Novel color via stimulation of individual photoreceptors at population scale.
+      </a>
+      <em>Science Advances</em>. 2025;11(16):eadu1052. Fig. 2.
+    </li>
+  </ol>
+
+  <h3>Видеоматериалы</h3>
+  <ol>
+    <li>
+      BBC.
+      <a href="https://wellcomecollection.org/works/y2g9exuj" target="_blank" rel="noopener noreferrer">
+        <em>Horizon: Do You See What I See?</em>
+      </a>
+      Документальная программа о восприятии цвета. 2011.
+    </li>
+  </ol>
+</section>
+
+<footer>Поля зрения · Независимый журнал · Выпуск 001</footer>
+</article>
+</main>
+</div>
+</body>
+</html>
