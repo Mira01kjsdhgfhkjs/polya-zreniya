@@ -289,22 +289,36 @@ footer{padding-top:22px;border-top:1px solid #cfc4b6;color:#82796d;font-family:A
   letter-spacing: .16em;
   text-transform: uppercase;
 }
-  @media (max-width: 700px) {
+ @media screen and (max-width: 700px) {
   .layout {
-    grid-template-columns: minmax(0, 1fr);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    overflow: visible;
   }
 
   .left-column,
   .right-column {
+    display: block;
+    position: relative;
     width: 100%;
     min-width: 0;
+    max-width: 100%;
+    height: auto;
+    overflow: visible;
+    box-sizing: border-box;
   }
 
   .left-column img {
+    display: block;
     width: 100%;
     height: auto;
   }
-}
+
+  .right-column {
+    padding: 24px;
+  }
 }
 </style>
 </head>
