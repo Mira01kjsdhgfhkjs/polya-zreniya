@@ -289,6 +289,22 @@ footer{padding-top:22px;border-top:1px solid #cfc4b6;color:#82796d;font-family:A
   letter-spacing: .16em;
   text-transform: uppercase;
 }
+  @media (max-width: 700px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .left-column,
+  .right-column {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .left-column img {
+    width: 100%;
+    height: auto;
+  }
+}
 }
 </style>
 </head>
